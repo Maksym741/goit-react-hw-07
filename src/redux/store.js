@@ -6,24 +6,24 @@ import filtersReducer from './filtersSlice';
 import { combineReducers } from 'redux';
 
 const persistConfig = {
-    key: 'contacts',
-    storage,
-    whitelist: ['items']
+  key: 'contacts',
+  storage,
+  whitelist: ['items']
 };
 
 const rootReducer = combineReducers({
-    contacts: persistReducer(persistConfig, contactsReducer),
-    filters: filtersReducer
+  contacts: persistReducer(persistConfig, contactsReducer),
+  filters: filtersReducer
 });
 
 const store = configureStore({
-    reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-        serializableCheck: {
-            ignoredActions: ['persist/PERSIST'],
-            ignoredPaths: ['contacts.items']
-        }
-    }),
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: ['persist/PERSIST'],
+      ignoredPaths: ['contacts.items']
+    }
+  }),
 });
 
 const persistor = persistStore(store);
